@@ -7,3 +7,4 @@ Este directorio contiene scripts para el procesamiento, alineación, post-proces
 - quality_control/: Scripts para el control de calidad de los datos.
 - analysis/: Scripts para el análisis de datos.
 - utilities/: Scripts de utilidades generales y funciones auxiliares.
+- pipelines/: Scripts de ejecución completa
