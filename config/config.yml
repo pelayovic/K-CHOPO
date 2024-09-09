@@ -1,0 +1,113 @@
+# K-CHOPO Configuration File
+# ---------------------------
+# This configuration file is designed for the Keen Comprehensive High-throughput Omics Pipeline Organizer (K-CHOPO).
+# The pipeline is tailored for the automated analysis of Nanopore sequencing data, including basecalling, alignment,
+# epitranscriptomic modifications detection, and more.
+
+# Author: Pelayo González de Lena Rodríguez, MSc
+# Affiliation: Cancer Epigenetics and Nanomedicine Lab | FINBA
+#             Systems Biology Lab | University of Oviedo
+# License: Distributed under the MIT License.
+# Contact: LinkedIn - https://www.linkedin.com/in/biopelayo/
+#          GitLab - https://gitlab.com/bio.pelayo/
+
+# ---------------------------------------------------------
+# INPUT FILES AND DIRECTORIES
+# ---------------------------------------------------------
+input_files:
+  basecalling_output: "/home/pelamovic/K-CHOPO/data/raw/fastq"
+    # Description: Directory containing the output files generated from the basecalling process.
+  sequencing_summary: "/home/pelamovic/K-CHOPO/data/raw/metadata/sequencing_summary.txt"
+    # Description: Path to the sequencing summary file, essential for QC analysis with PycoQC.
+  bam_file: "/home/pelamovic/K-CHOPO/data/processed/alignments/aligned.bam"
+    # Description: Path to the BAM file containing aligned reads from the sequencing data.
+  flair_output_dir: "/home/pelamovic/K-CHOPO/results/flair_output"
+    # Description: Directory where FLAIR output files will be saved.
+  flair_yml: "/home/pelamovic/K-CHOPO/config/FLAIR.yml"
+    # Description: Path to the FLAIR configuration YAML file.
+  flair_repo: "/home/pelamovic/K-CHOPO/scripts/pipelines/flair"
+    # Description: Path to the FLAIR repository.
+  reference_genome: "/home/pelamovic/K-CHOPO/data/reference/genome/TAIR10_chr_all.fas"
+    # Description: Path to the reference genome in FASTA format.
+  reference_genome_norm: "/home/pelamovic/K-CHOPO/data/reference/genome/TAIR10_chr_all_norm.fas"
+    # Description: Path to the normalized reference genome in FASTA format.
+  fastq_file: "/home/pelamovic/K-CHOPO/data/raw/fastq/WT_C_R1.fq.gz"
+    # Description: Path to the FASTQ file containing raw sequencing reads.
+  gtf_file: "/home/pelamovic/K-CHOPO/data/reference/annotations/AtRTD2_19April2016.gtf"
+    # Description: Path to the GTF file containing gene annotations.
+  reads_manifest: "/home/pelamovic/K-CHOPO/config/reads_manifest.tsv"
+    # Description: Path to the reads manifest file used for input organization.
+  counts_matrix: "/home/pelamovic/K-CHOPO/results/counts_matrix.tsv"
+    # Description: Path to the counts matrix file used in differential expression analysis.
+  output_diffexp: "/home/pelamovic/K-CHOPO/results/diffExp_salmon"
+    # Description: Directory where differential expression analysis output will be saved.
+  drs_output_dir: "/home/pelamovic/K-CHOPO/results/DRS_output"
+    # Description: Directory for storing output from DRS (Direct RNA Sequencing).
+  iso_usage_file: "/home/pelamovic/K-CHOPO/results/iso_usage.txt"
+    # Description: Path to the isoform usage file for isoform switching analysis.
+  bed_file: "/home/pelamovic/K-CHOPO/results/flair.collapse.isoforms.bed"
+    # Description: Path to the BED file containing collapsed isoforms.
+  summarized_counts_matrix: "/home/pelamovic/K-CHOPO/results/WT_counts_matrix_sumadas.tsv"
+    # Description: Path to the summarized counts matrix file.
+  diff_isos_file: "/home/pelamovic/K-CHOPO/results/diff_isos.txt"
+    # Description: Path to the file containing differential isoforms.
+  pca_output: "/home/pelamovic/K-CHOPO/results/pca_output"
+    # Description: Directory where the PCA analysis output will be saved.
+  spls_output: "/home/pelamovic/K-CHOPO/results/spls_output"
+    # Description: Directory where the SPLS analysis output will be saved.
+  isoformswitch_analyzer_output: "/home/pelamovic/K-CHOPO/results/isoformswitch_analyzer_output"
+    # Description: Directory for storing output from the IsoformSwitchAnalyser.
+  map_file: "/home/pelamovic/K-CHOPO/data/processed/alignments/mapped_reads.sam"
+    # Description: Path to the SAM file containing mapped reads.
+  mod_file: "/home/pelamovic/K-CHOPO/results/modified_reads.txt"
+    # Description: Path to the file listing modified reads from the sequencing data.
+
+# ---------------------------------------------------------
+# FLAGS AND OPTIONS
+# ---------------------------------------------------------
+options:
+  run_flair: true
+    # Description: Flag to determine whether FLAIR should be executed. Set to false to skip FLAIR execution.
+  r_version_required: "4.0.0"
+    # Description: Minimum required version of R for the pipeline. Ensure the installed version is compatible.
+
+# ---------------------------------------------------------
+# ENVIRONMENT SETTINGS
+# ---------------------------------------------------------
+environment:
+  conda_env_name: "eligos2"
+    # Description: Name of the Conda environment for running ELIGOS2.
+  flair_conda_env: "FLAIR_original"
+    # Description: Conda environment for running FLAIR-specific commands.
+  python_version: "3.6"
+    # Description: Python version to be used in the Conda environment for ELIGOS2.
+
+# ---------------------------------------------------------
+# TOOL INSTALLATION AND SETUP
+# ---------------------------------------------------------
+tools:
+  bedops: true
+    # Description: Flag to install BEDOPS via Conda.
+  minimap2: true
+    # Description: Flag to install minimap2 via Conda.
+  samtools: true
+    # Description: Flag to install samtools via Conda.
+  eligos2_repo: "https://gitlab.com/piroonj/eligos2.git"
+    # Description: URL of the ELIGOS2 repository for cloning.
+
+# ---------------------------------------------------------
+# OUTPUT SETTINGS
+# ---------------------------------------------------------
+output:
+  path: "/home/pelamovic/K-CHOPO/results"
+    # Description: Base directory for saving all pipeline outputs.
+  logs: "/home/pelamovic/K-CHOPO/logs"
+    # Description: Directory for storing log files generated during the pipeline run.
+
+# ---------------------------------------------------------
+# NOTES
+# ---------------------------------------------------------
+# Ensure that all paths provided in this configuration file are correct and accessible.
+# Modify the flags in the 'options' section as needed to enable or disable specific pipeline steps.
+# This configuration file should be kept with the main pipeline script for reference and updates.
+
